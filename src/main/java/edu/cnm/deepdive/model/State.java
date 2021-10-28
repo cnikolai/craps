@@ -16,6 +16,11 @@ public enum State {
       }
       return next;
     }
+
+    @Override
+    public boolean isTerminal() {
+      return false;
+    }
   },
   WIN,
   LOSS,
@@ -34,7 +39,13 @@ public enum State {
 
     @Override
     public State next(Roll roll) {
-      throw new IllegalStateException("This method can't be invoked when in the POINT state."); //not a checked exception: a runtime exception; therefore, don't have to handle it.
+      throw new IllegalStateException(
+          "This method can't be invoked when in the POINT state."); //not a checked exception: a runtime exception; therefore, don't have to handle it.
+    }
+
+    @Override
+    public boolean isTerminal() {
+      return false;
     }
   };
 
@@ -44,6 +55,14 @@ public enum State {
 
   public State next(Roll roll, int point) {
     return next(roll);
+  }
+
+  public static State initial() {
+    return State.COME_OUT;
+  }
+
+  public boolean isTerminal() {
+    return true;
   }
 
 }
